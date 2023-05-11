@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+Welcome ..!
+
+{% endblock %}
+{% block title %}
+
+vehicle_management
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <h1>Welcome....</h1>
+</div>
+<br>
+<div class="container">
+<div class="row"><h4 style="text-align:center;">VEHICLE MANAGEMENT SYSTEM</h4></div>
+    <div class="row">
+        <img class="my_banner" src="{% static 'img/banner.jpg' %}" alt="banner" >
+    </div>
+  <br>
+    <div class="row">
+        <br>
+        <div class="col-md-6" style="position:relative;">
+            <a href="{% url 'login' %}" class="btn btn-primary" style="position:absolute;bottom:0;right:0;">Login</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

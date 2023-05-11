@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Vehicle List{% endblock %}
+
+{% block content %}
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+</style>
+<div style="background-color:#F1FAFA;">
+<br>
+    <h1>Vehicle List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Vehicle Number</th>
+                <th>Vehicle Type</th>
+                <th>Vehicle Model</th>
+                <th>Vehicle Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in vehicles %}
+                <tr>
+                    <td>{{ vehicle.vehicle_number }}</td>
+                    <td>{{ vehicle.vehicle_type }}</td>
+                    <td>{{ vehicle.vehicle_model }}</td>
+                    <td>{{ vehicle.vehicle_description }}</td>
+                    <td>
+                        <a href="{% url 'edit_vehicle' vehicle.pk %}">Edit</a>
+                        <form method="post" action="{% url 'delete_vehicle' vehicle.pk %}">
+                            {% csrf_token %}
+                            <br>
+                            <a class="btn btn-danger" href="{% url 'delete_vehicle' vehicle.pk %}">Delete</a>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No vehicles found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br>
+<br>
+<div class="container text-center">
+    <a  href="{% url 'add_vehicle' %}" class="btn btn-primary">Add Vehicle</a>
+    <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+        <br>
+    <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+</div>
+{% endblock %}
